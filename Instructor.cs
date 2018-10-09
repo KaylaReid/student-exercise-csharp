@@ -9,7 +9,7 @@ namespace StudentExercises
         public string SlackHandle { get; set; }
         public Cohort Cohort { get; set; }
 
-        // build a constructor
+         // this is a constructor, a constructor is used to construct a new object
         public Instructor (string fistName, string lastName, string slackhandle, Cohort cohort) {
             FistName = fistName;
             LastName = lastName;
@@ -17,8 +17,7 @@ namespace StudentExercises
             Cohort = cohort;
         }
 
-
-        // a method to assign an exercise to a student
+        // this ia a method, a method to assign an exercise to a student
         public void AssignExercises(Exercise exercise, Student student){
             student.ExerciseList.Add(exercise);
         }
