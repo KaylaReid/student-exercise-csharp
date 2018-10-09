@@ -7,7 +7,15 @@ namespace StudentExercises
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SlackHandle { get; set; }
-        public string CohortName { get; set; }
+        public string FullName {
+            get {
+                return $"{FirstName} {LastName}";
+            }
+        }
+        
+        // representing FK joiner table
+        public Cohort Cohort { get; set; }
         public List<Exercise> ExerciseList = new List<Exercise>();
+        
     }
 }
