@@ -52,6 +52,7 @@ namespace StudentExercises
             Meg.AssignExercises(Terminal, Kayla);
             Meg.AssignExercises(Syntax, Ricky);
             Meg.AssignExercises(Terminal, Ricky);
+
         }
     }
 }
