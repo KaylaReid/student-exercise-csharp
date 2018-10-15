@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentExercises
 {
@@ -52,6 +54,48 @@ namespace StudentExercises
             Meg.AssignExercises(Terminal, Kayla);
             Meg.AssignExercises(Syntax, Ricky);
             Meg.AssignExercises(Terminal, Ricky);
+
+
+
+            List<Student> students = new List<Student>() {
+                Ricky,
+                Kayla,
+                Jen,
+                Jessica
+            };
+
+            List<Exercise> exercises = new List<Exercise>() {
+                Loops,
+                ArrayMothods,
+                Objects,
+                Classes,
+                Syntax,
+                Terminal
+            };
+
+            List<Cohort> cohort = new List<Cohort>() {
+                Day26,
+                Day27,
+                Day28
+            };
+
+            List<Instructor> instructor = new List<Instructor>() {
+                Steve,
+                Meg,
+                Andy
+            };
+
+            IEnumerable<Exercise> javaScriptexercies = from ex in exercises
+            where ex.Language == "JavaScript"
+            select ex;
+
+            javaScriptexercies.ToList();
+            foreach(Exercise e in javaScriptexercies)
+            {
+                Console.WriteLine(e.ExerciseName);
+            }
+      
+            
 
         }
     }
