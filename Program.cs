@@ -94,7 +94,26 @@ namespace StudentExercises
             {
                 Console.WriteLine(e.ExerciseName);
             }
+
+            IEnumerable<Student> studentsincohort = from s in students
+            where s.Cohort == Day27
+            select s;
       
+            studentsincohort.ToList();
+            foreach(Student s in studentsincohort)
+            {
+                Console.WriteLine($"{s.FirstName} {s.LastName} Student of cohort 27");
+            }
+
+            IEnumerable<Instructor> instructorCohort = from inst in instructor
+            where inst.Cohort == Day27
+            select inst;
+
+            instructorCohort.ToList();
+            foreach(Instructor inst in instructorCohort)
+            {
+                Console.WriteLine($"{inst.FistName} {inst.LastName} Instructor for cohort 27");
+            }
             
 
         }
