@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dapper;
+using Microsoft.Data.Sqlite;
 
 namespace StudentExercises
 {
@@ -160,6 +162,19 @@ namespace StudentExercises
             {
                 Console.WriteLine($"{studnetGroup.Key} has {studnetGroup.Count()} students");
             }
+
+            SqliteConnection db = DatabaseInterface.Connection;
+
+
+            // the name of the colloms names from the db have to match the property names
+            List<Exercise> exercisesFromDB = db.Query<Exercise>(@"SELECT * FROM Exercise").ToList();
+            foreach(Exercise ex in exercisesFromDB)
+            {
+                Console.WriteLine($"{ex.Language} {ex.Name} its working");
+            }
+            
+            
+            // .Where(ex => ex.language == "JavaScript").ToList();
 
         }
     }

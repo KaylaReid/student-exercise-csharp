@@ -7,10 +7,11 @@ using System.Collections;
 using Dapper;
 using StudentExercises;
 
-namespace StudentExercises.Data
+namespace StudentExercises
 {
     public class DatabaseInterface
     {
+        // you have to have a connection in order to do a query this is a connection to the database
         public static SqliteConnection Connection
         {
             get
@@ -19,6 +20,7 @@ namespace StudentExercises.Data
                 return new SqliteConnection(connectionString);
             }
         }
+
 
         public static void CheckExercisesTable()
         {
@@ -41,12 +43,13 @@ namespace StudentExercises.Data
 
                     db.Execute(@"
                     INSERT INTO Exercise (Name, Language) VALUES ('Loops', 'JavaScript');
-                    INSERT INTO Exercise (Name, Language) VALUES ('Classes', 'JavaScript');
-                    INSERT INTO Exercise (Name, Language) VALUES ('Design');
+                    INSERT INTO Exercise (Name, Language) VALUES ('Classes', 'CSharp');
+                    INSERT INTO Exercise (Name, Language) VALUES ('Array Methods', 'JavaScript');
+                    INSERT INTO Exercise (Name, Language) VALUES ('Objects', 'JavaScript');
+                    INSERT INTO Exercise (Name, Language) VALUES ('Terminal', 'Everything');
                     ");
                 }
             }
         }
-
     }
 }
