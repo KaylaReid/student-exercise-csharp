@@ -8,10 +8,10 @@ namespace StudentExercises
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             
+
             Exercise Loops = new Exercise ("Loops", "JavaScript");
             Exercise ArrayMothods = new Exercise ("Array Methods", "JavaScript");
             Exercise Objects = new Exercise ("Objects", "JavaScript");
@@ -122,7 +122,7 @@ namespace StudentExercises
             instructorCohort.ToList();
             // foreach(Instructor inst in instructorCohort)
             // {
-            //     Console.WriteLine($"{inst.FistName} {inst.LastName} Instructor for cohort 27");
+            //     Console.WriteLine($"{inst.FirstName} {inst.LastName} Instructor for cohort 27");
             // }
 
             // 4. Sort the students by their last name.
@@ -165,17 +165,54 @@ namespace StudentExercises
 
             SqliteConnection db = DatabaseInterface.Connection;
 
+            DatabaseInterface.CheckInstructorTable();
+
 
             // the name of the colloms names from the db have to match the property names
-            List<Exercise> exercisesFromDB = db.Query<Exercise>(@"SELECT * FROM Exercise").ToList();
-            foreach(Exercise ex in exercisesFromDB)
-            {
-                Console.WriteLine($"{ex.Language} {ex.Name} its working");
-            }
-            
-            
-            // .Where(ex => ex.language == "JavaScript").ToList();
+            // List<Exercise> exercisesFromDB = db.Query<Exercise>(@"
+            //     SELECT * FROM Exercise
+            //     WHERE Exercise.Language == 'JavaScript'
+            // ").ToList();
+            // foreach(Exercise ex in exercisesFromDB)
+            // {
+            //     Console.WriteLine($"{ex.Language} {ex.Name}");
+            // }
 
+            // db.Execute(@"
+            //     INSERT INTO Exercise (Name, Language)
+            //     VALUES ('Overly Excited', 'JavaScript')
+            // ");
+
+            // List<Exercise> exercisesFromDB = db.Query<Exercise>(@"
+            //     SELECT * FROM Exercise
+            //     WHERE Exercise.Language == 'JavaScript'
+            // ").ToList();
+
+            // foreach(Exercise ex in exercisesFromDB)
+            // {
+            //     Console.WriteLine($"{ex.Language} {ex.Name}");
+            // }
+
+            List<Instructor> instructorList = db.Query<Instructor, Cohort, Instructor>(@"
+                SELECT 
+                    i.FirstName,
+                    i.LastName,
+                    i.SlackHandle,
+                    i.CohortId,
+                    c.Id,
+                    c.Name
+                FROM Instructor i
+                JOIN Cohort c WHERE c.id = i.CohortId
+                ", (instructor1, cohort1) => 
+            {   
+                instructor1.Cohort = cohort1;
+                return instructor1;
+            }).ToList();
+
+            foreach(Instructor inst in instructorList)
+            {
+                Console.WriteLine($"{inst.FirstName} {inst.LastName} {inst.Cohort.Name}");
+            }
         }
     }
 }

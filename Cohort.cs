@@ -11,5 +11,9 @@ namespace StudentExercises
         public Cohort (string name) {
             Name = name;
         }
+
+        public Cohort () {
+            
+        }
     }
 }
